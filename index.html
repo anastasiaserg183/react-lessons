@@ -16,40 +16,35 @@ babel.min.js"></script>
     <div id="container"></div>
     <script type="text/babel">
         class A extends React.Component {
-            constructor(props) {
-                super(props);
-                
-                this.state = {
-                    s: 0
-                }
-                this.t = this.t.bind(this);
-            }
-            
-            t() {
-                this.setState ({
-                  s: this.state.s + 1  
-                })
-            }
-            
-            componentDidMount() {
-                setInterval(this.t, 1000)
-            }
             
             render() {
                 var S = {
-                    color: this.props.color
+                    width: 100,
+                    height: 100,
+                    backgroundColor: this.props.col,
+                    borderRadius: 50
                 }
                 
                 return (
-                    <h1 style={S}>{this.state.s}</h1>
+                    <div style={S}></div>
                 )
             }
         }
 
-        var red = <A color="red" />
+        
+            var colors = ['red', 'black', 'green']
+            var colData = []
+            
+            for(var i=0; i<colors.length; i++) {
+                var color = colors[i];
+                colData.push(<A key={i+color} col={color} />)
+            }
+        
+
+        
 
         ReactDOM.render (
-            <div>{red}</div>,
+            <div>{colData}</div>,
             document.getElementById('container')
         )
         
