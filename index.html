@@ -16,15 +16,40 @@ babel.min.js"></script>
     <div id="container"></div>
     <script type="text/babel">
         class A extends React.Component {
+            constructor(props) {
+                super(props);
+                
+                this.state = {
+                    s: 0
+                }
+                this.t = this.t.bind(this);
+            }
+            
+            t() {
+                this.setState ({
+                  s: this.state.s + 1  
+                })
+            }
+            
+            componentDidMount() {
+                setInterval(this.t, 1000)
+            }
+            
             render() {
+                var S = {
+                    color: this.props.color
+                }
+                
                 return (
-                    <button type={this.props.behavior}>{this.props.children}</button>
+                    <h1 style={S}>{this.state.s}</h1>
                 )
             }
         }
 
+        var red = <A color="red" />
+
         ReactDOM.render (
-            <A type="submit">CLock</A>,
+            <div>{red}</div>,
             document.getElementById('container')
         )
         
